@@ -1,21 +1,49 @@
 import Piece from "../piece";
 
-export class Pawn extends Piece{
+export class Pawn extends Piece {
     constructor(line: number, column: number, color: string) {
         super(line, column, color);
     }
-    calcMove(){
-        let direction = this.color == "white" ? -1 : 1;
-        let moves = [];
 
-        if(this.isMoved ==false){
-            moves.push([this.line + 2 * direction, this.column]);
-        };  
-            moves.push([this.line + direction, this.column]);
-            moves.push([this.line + direction, this.column - 1]);
-            moves.push([this.line + direction, this.column + 1]);
+    calcMove(grid: (Piece | null)[][]) {
+    let direction = this.color == "white" ? 1 : -1
+        let moves = [];
         
+        let nextLine = this.line + direction;
+
+        if (nextLine >= 0 && nextLine <= 7) {
+
+            let statusForward = this.checkCollision(grid, nextLine, this.column);
+            
+            if (statusForward === "empty") {
+                moves.push([nextLine, this.column]);
+
+                if (this.isMoved == false) {
+                    let doubleLine = this.line + 2 * direction;
+                    
+                    if (doubleLine >= 0 && doubleLine <= 7) {
+                        let statusDouble = this.checkCollision(grid, doubleLine, this.column);
+                        if (statusDouble === "empty") {
+                            moves.push([doubleLine, this.column]);
+                        }
+                    }
+                }
+            }            
+            if (this.column > 0) {
+                let statusLeft = this.checkCollision(grid, nextLine, this.column - 1);
+                if (statusLeft === "enemy") {
+                    moves.push([nextLine, this.column - 1]);
+                }
+            }
+
+            if (this.column < 7) {
+                let statusRight = this.checkCollision(grid, nextLine, this.column + 1);
+                if (statusRight === "enemy") {
+                    moves.push([nextLine, this.column + 1]);
+                }
+            }
+        }
+
         return moves;
-      
     }
 }

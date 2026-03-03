@@ -12,8 +12,15 @@ export default class Piece {
         this.isAlive = true; 
         this.isMoved = false;    
     }
-
-    move() {
-        console.log("Calculando movimento...");
+        calcMove(grid: (Piece | null)[][]): number[][] {
+        return []; 
     }
+    checkCollision(grid: (Piece | null)[][], targetLine: number, targetColumn: number) {
+        const target = grid[targetLine][targetColumn];
+        
+        if (target === null) return "empty"; 
+        if (target.color !== this.color) return "enemy"; 
+        return "friend"; 
+    }
+
 }
