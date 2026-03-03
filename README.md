@@ -19,7 +19,7 @@ Chess/
 │       ├── knight/
 │       │   └── moveKnight.ts    # Classe do Cavalo
 │       ├── pawn/
-│       │   └── movePawn.ts      # Classe do Peão ✅
+│       │   └── movePawn.ts      # Classe do Peão 
 │       ├── queen/
 │       │   └── moveQueen.ts     # Classe da Rainha
 │       └── rook/
@@ -136,41 +136,6 @@ Quando você executa `npm run dev`, o console mostra:
 
 ---
 
-## 🎮 Como Customizar a Simulação
-
-### 1️⃣ Mudar a posição inicial do peão
-No arquivo `src/index.ts`:
-```typescript
-const peonTesteB = new Pawn(4, 3, 'white');  // Linha 4, Coluna 3
-meuTabuleiro.grid[4][3] = peonTesteB;
-```
-
-### 2️⃣ Escolher qual movimento usar
-```typescript
-// Índice dos movimentos disponíveis:
-movimentosPossiveis[0]  // Movimento de 2 casas (primeira vez)
-movimentosPossiveis[1]  // Movimento de 1 casa para frente
-movimentosPossiveis[2]  // Captura diagonal esquerda
-movimentosPossiveis[3]  // Captura diagonal direita
-
-// Exemplo: mover 2 casas
-moverPeca(peonTesteB, movimentosPossiveis[0][0], movimentosPossiveis[0][1]);
-```
-
-### 3️⃣ Testar múltiplos peões
-```typescript
-const peon1 = new Pawn(5, 2, 'white');
-const peon2 = new Pawn(4, 4, 'black');
-
-meuTabuleiro.grid[5][2] = peon1;
-meuTabuleiro.grid[4][4] = peon2;
-
-moverPeca(peon1, 4, 2);
-moverPeca(peon2, 5, 4);
-```
-
----
-
 ## 📝 Regras do Peão Implementadas
 
 | Situação | Movimento |
@@ -246,4 +211,3 @@ moverPeca(peon2, 5, 4);
 
 Projeto de estudo de Xadrez em TypeScript
 
-**Última atualização:** Fevereiro 28, 2026
